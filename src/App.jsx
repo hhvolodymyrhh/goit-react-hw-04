@@ -117,6 +117,7 @@ function App() {
         contentLabel="Перегляд зображення"
         className="modal"
         overlayClassName="overlay"
+        style={customStyles}
       >
         <button onClick={closeModal} className="close-modal-btn">✖</button>
         {selectedImage && (
