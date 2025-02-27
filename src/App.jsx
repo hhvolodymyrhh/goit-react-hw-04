@@ -22,7 +22,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
-Modal.setAppElement('App');
+Modal.setAppElement('#root');
 
   // ....для модалки
 
@@ -36,8 +36,6 @@ function App() {
    const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
  
-
-
   const openModal = (image) => {
     setSelectedImage(image.urls.regular); // велике зображення
     setIsModalOpen(true);
