@@ -1,12 +1,12 @@
 import css from './ImageGallery.module.css';
 import ImageCard from './ImageCard/ImageCard.jsx';
 
-function ImageGallery({images}) {
+function ImageGallery({images, openModal}) {
  
   return (
    
   <ul className={css.imageGallery}>
-      <ImageCard images={images} />
+      <ImageCard images={images} openModal={openModal} />
   </ul>
    
   )

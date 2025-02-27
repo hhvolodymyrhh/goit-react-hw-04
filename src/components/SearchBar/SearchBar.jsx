@@ -1,8 +1,7 @@
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
-import ImageGallery from '../ImageGallery/ImageGallery.jsx';
 
-const SearchBar = ({ images, query, setQuery, handleSubmit }) => {
+const SearchBar = ({ query, setQuery, handleSubmit }) => {
   return (
     <header className={css.searchBar}>
       <form onSubmit={handleSubmit}>
@@ -17,8 +16,7 @@ const SearchBar = ({ images, query, setQuery, handleSubmit }) => {
         <button type="submit">Search</button>
       </form>
       <Toaster position="top-right" />
-      <ImageGallery images={images} />  
-     
+       
     </header>
   );
 };
