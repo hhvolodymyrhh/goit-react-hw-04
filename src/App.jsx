@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar/SearchBar.jsx';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 import Loader from './components/Loader/Loader.jsx';
 import ImageGallery from './components/ImageGallery/ImageGallery.jsx'
+import ModalImage from './components/ImageModal/ImageModal.jsx'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Modal from 'react-modal';
@@ -109,21 +110,13 @@ function App() {
       )}
 
       {/* Модальне вікно */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Перегляд зображення"
-        className="modal"
-        overlayClassName="overlay"
-        style={customStyles}
-      >
-        <button onClick={closeModal} className="close-modal-btn">✖</button>
-        {selectedImage && (
-          <div className="modal-content">
-            <img src={selectedImage} alt="Перегляд зображення" />
-          </div>
-        )}
-      </Modal>
+      <ModalImage 
+        isOpen={isModalOpen} 
+        closeModal={closeModal} 
+        selectedImage={selectedImage} 
+        CloseModal={closeModal}
+      />
+      
     </>
   );
 }
