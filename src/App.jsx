@@ -13,18 +13,7 @@ import Modal from 'react-modal';
 const API_KEY = "tp34Odr_3BAAPDxyfW_uOW2KXWVVcYSieVmGJimjlhk";
 const API_URL = "https://api.unsplash.com/search/photos";
   // для модалки
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 Modal.setAppElement('#root');
-
   // ....для модалки
 
 function App() {
@@ -66,7 +55,7 @@ function App() {
       }
 
       setImages((prevImages) => [...prevImages, ...response.data.results]);
-      // console.dir(images.urls.regular)
+      
     } catch (error) {
       toast.error("Помилка при завантаженні зображень.");
       console.error(error);

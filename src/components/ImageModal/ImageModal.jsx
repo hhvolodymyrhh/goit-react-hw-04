@@ -1,10 +1,9 @@
 import Modal from 'react-modal';
 import css from './ImageModal.module.css';
-import { useEffect } from 'react';
 
 Modal.setAppElement('#root'); // Встановлюємо кореневий елемент для доступності
 
-function ModalImage({ isOpen, closeModal, selectedImage, CloseModal }) {
+function ModalImage({ isOpen, closeModal, selectedImage }) {
   const customStyles = {
      
        overlay: {
@@ -39,20 +38,7 @@ function ModalImage({ isOpen, closeModal, selectedImage, CloseModal }) {
           color: "white",
           inset: 0,
         },
-  };
-
-  useEffect(() => {
-    const handleKeypress = (e) => {
-      if (e.key === 'Escape') { CloseModal() } 
-      console.log(e.key)
-    }
-    
-    document.addEventListener('keydown', handleKeypress);
-
-    return()=>{ document.removeEventListener('keydown', handleKeypress);}
-    
-  }, [CloseModal])
-  
+  };  
 
   return (
     <Modal
@@ -63,7 +49,7 @@ function ModalImage({ isOpen, closeModal, selectedImage, CloseModal }) {
       className={css.modal}
       overlayClassName={css.overlay}
     >
-      <button onClick={closeModal} className="close-modal-btn">✖</button>
+      <button onClick={closeModal} className={css.closeModalBtn}>✖</button>
         {selectedImage && (
           <div className="modal-content">
             <img src={selectedImage} alt="Перегляд зображення" />
