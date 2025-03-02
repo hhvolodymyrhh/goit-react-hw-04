@@ -6,7 +6,12 @@ function ImageGallery({images, openModal}) {
   return (
    
   <ul className={css.imageGallery}>
-      <ImageCard images={images} openModal={openModal} />
+    {images.map((img) => (
+        <li key={img.id} className={css.imageItem} onClick={() => openModal(img)}>
+            <ImageCard img={img} />
+        </li>
+      ))}
+      
   </ul>
    
   )
