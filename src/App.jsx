@@ -25,7 +25,11 @@ function App() {
   // для модалки
    const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  // стан для помилки
+  const [isError, setIsError] = useState(false);
  
+
+
   const openModal = (image) => {
     setSelectedImage(image.urls.regular); // велике зображення
     setIsModalOpen(true);
@@ -41,6 +45,7 @@ function App() {
     setIsLoading(true);
 
     try {
+      setIsError(false);
       const response = await axios.get(API_URL, {
         params: {
           query: newQuery,
@@ -53,12 +58,14 @@ function App() {
       if (response.data.results.length === 0) {
         setHasMore(false);
         // повідомлення про помилку...................................
+        setIsError(true);
         toast.error("Відсутні зображення.");
       }
 
       setImages((prevImages) => [...prevImages, ...response.data.results]);
       
     } catch (error) {
+      setIsError(true);
       toast.error("Помилка при завантаженні зображень.");
       console.log(error);
     } finally {
@@ -70,6 +77,7 @@ function App() {
     event.preventDefault();
     
     if (query.trim() === "") {
+      setIsError(true);
       toast.error("Будь ласка, введіть текст для пошуку зображень.");
       return;
     }
@@ -96,7 +104,7 @@ function App() {
       />
       <ImageGallery images={images} openModal={openModal} /> 
       {/* тост перенесений в компонент............................ */}
-      <ErrorMessage />
+      {isError && <ErrorMessage />}
       {isLoading && <Loader />} 
       {hasMore && images.length > 0 && !isLoading && (
         <LoadMoreBtn onLoadMore={handleLoadMore} />
