@@ -1,5 +1,6 @@
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const SearchBar = ({ query, setQuery, handleSubmit }) => {
   return (
@@ -15,7 +16,7 @@ const SearchBar = ({ query, setQuery, handleSubmit }) => {
         />
         <button type="submit">Search</button>
       </form>
-      <Toaster position="top-right" />
+      
        
     </header>
   );

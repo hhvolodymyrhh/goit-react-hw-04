@@ -8,7 +8,7 @@ import ModalImage from './components/ImageModal/ImageModal.jsx'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Modal from 'react-modal';
-
+import ErrorMessage from './components/ErrorMessage/ErrorMessage.jsx';
 
 const API_KEY = "tp34Odr_3BAAPDxyfW_uOW2KXWVVcYSieVmGJimjlhk";
 const API_URL = "https://api.unsplash.com/search/photos";
@@ -52,13 +52,15 @@ function App() {
       
       if (response.data.results.length === 0) {
         setHasMore(false);
+        // повідомлення про помилку...................................
+        toast.error("Відсутні зображення.");
       }
 
       setImages((prevImages) => [...prevImages, ...response.data.results]);
       
     } catch (error) {
       toast.error("Помилка при завантаженні зображень.");
-      console.error(error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -92,13 +94,14 @@ function App() {
         setQuery={setQuery} 
         handleSubmit={handleSubmit} 
       />
-      <ImageGallery images={images} openModal={openModal } /> 
+      <ImageGallery images={images} openModal={openModal} /> 
+      {/* тост перенесений в компонент............................ */}
+      <ErrorMessage />
       {isLoading && <Loader />} 
       {hasMore && images.length > 0 && !isLoading && (
         <LoadMoreBtn onLoadMore={handleLoadMore} />
       )}
 
-      {/* Модальне вікно */}
       <ModalImage 
         isOpen={isModalOpen} 
         closeModal={closeModal} 
