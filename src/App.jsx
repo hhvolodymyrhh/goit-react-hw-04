@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar.jsx';
 import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
@@ -93,6 +93,12 @@ function App() {
     setPage(nextPage);
     fetchImages(query, nextPage); 
   };
+
+  useEffect(() => {
+    if (query !== "") {
+      fetchImages(query, page);
+    }
+  }, [query, page]);
 
   return (
     <>
