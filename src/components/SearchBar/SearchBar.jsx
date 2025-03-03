@@ -1,25 +1,41 @@
-import toast, { Toaster } from "react-hot-toast";
-import css from "./SearchBar.module.css";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useState } from 'react';
+import css from './SearchBar.module.css';
+import toast from 'react-hot-toast';
 
-const SearchBar = ({ query, setQuery, handleSubmit }) => {
+function SearchBar({ query, setQuery }) {
+  const [inputValue, setInputValue] = useState(query); 
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value); 
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (inputValue.trim() === "") {
+      toast.error("Порожне поле пошуку!");
+      return;
+    }
+
+    setQuery(inputValue.trim()); 
+  };
+
   return (
-    <header className={css.searchBar}>
-      <form onSubmit={handleSubmit}>
+    <header className={css.searchbar}>
+      <form className={css.form} onSubmit={onSubmit}>
         <input
+          className={css.input}
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search images..."
+          value={inputValue}
+          onChange={handleChange}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={css.button}>Search</button>
       </form>
-      
-       
     </header>
   );
-};
+}
 
 export default SearchBar;
