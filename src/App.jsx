@@ -69,6 +69,12 @@ function App() {
   };
 
   useEffect(() => {
+  setImages([]);
+  setPage(1);   
+  setHasMore(true); 
+}, [query]);
+
+  useEffect(() => {
     fetchImages();
   }, [query, page]);
 
